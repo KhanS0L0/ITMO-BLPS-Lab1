@@ -49,7 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public void saveNewTemporaryReview(TemporaryReviewDTO dto) throws Exception {
+    public void saveNewTemporaryReview(TemporaryReviewDTO dto) throws UserNotFoundException {
         TemporaryReview entity = temporaryReviewMapper.mapDTOToEntity(dto);
 
         User author = userService.findUserByUsername(dto.getUserLogin());

@@ -4,12 +4,13 @@ import com.example.dto.PublishedReviewDTO;
 import com.example.dto.TemporaryReviewDTO;
 import com.example.entity.review.PublishedReview;
 import com.example.entity.review.TemporaryReview;
+import com.example.exception.UserNotFoundException;
 
 import java.util.List;
 
 public interface ReviewService {
 
-    void saveNewTemporaryReview(TemporaryReviewDTO dto) throws Exception;
+    void saveNewTemporaryReview(TemporaryReviewDTO dto) throws UserNotFoundException;
 
     void updateTemporaryReview(TemporaryReviewDTO dto) throws NullPointerException;
 
