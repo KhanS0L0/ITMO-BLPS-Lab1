@@ -1,8 +1,10 @@
 package com.example.entity.user;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,9 +25,9 @@ public class Account {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "ACCOUNT_ROLES",
+            name = "ACCOUNTS_ROLES",
             joinColumns = @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
     )

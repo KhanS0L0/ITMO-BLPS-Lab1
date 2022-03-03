@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.entity.enums.AccountRoles;
 import com.example.security.JwtConfig.JwtConfig;
 import com.example.security.JwtUtils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/account/signUp").permitAll()
                 .antMatchers("/api/account/signIn").permitAll()
+
+                .antMatchers("/api/published/all").hasAnyRole(AccountRoles.USER.getSecurityRole())
+
+                .antMatchers("/api/temporary/all").hasAnyRole(AccountRoles.ADMIN.getSecurityRole())
+                .antMatchers("/api/temporary/create").hasRole(AccountRoles.USER.getSecurityRole())
+                .antMatchers("/api/temporary/update").hasRole(AccountRoles.USER.getSecurityRole())
+
+                .antMatchers("/api/notification/send").hasRole(AccountRoles.ADMIN.getSecurityRole())
+                .antMatchers("/api/notification/all").hasAnyRole(AccountRoles.USER.getSecurityRole())
+
                 .anyRequest().authenticated()
 
                 .and()

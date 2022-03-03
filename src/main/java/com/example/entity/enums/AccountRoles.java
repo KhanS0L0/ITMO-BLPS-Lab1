@@ -2,21 +2,11 @@ package com.example.entity.enums;
 
 import java.util.stream.Stream;
 
-
-/*
-* Понадобиться чуть позже когда начну добавлять привилегии по ролям(SecurityConfig)
-* */
 public enum AccountRoles {
     USER("USER") {
         @Override
         public String toString() {
             return "ROLE_USER";
-        }
-    },
-    BANNED_USER("BANNED_USER") {
-        @Override
-        public String toString() {
-            return "ROLE_BANNED_USER";
         }
     },
     ADMIN("ADMIN") {

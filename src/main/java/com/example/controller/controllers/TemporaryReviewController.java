@@ -20,12 +20,6 @@ public class TemporaryReviewController {
         this.reviewService = reviewService;
     }
 
-    @PostMapping(path = "/create", produces = "application/json")
-    public ResponseEntity createReview(@RequestBody TemporaryReviewDTO dto) throws UserNotFoundException {
-        reviewService.saveNewTemporaryReview(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
     @GetMapping(path = "/all", produces = "application/json")
     public ResponseEntity getTemporaryReviews(@RequestParam(name = "id") Long administratorId){
         List<TemporaryReviewDTO> temporaryReviews = reviewService.getAllTemporaryReviews(administratorId);
@@ -33,6 +27,12 @@ public class TemporaryReviewController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         else
             return ResponseEntity.ok(temporaryReviews);
+    }
+
+    @PostMapping(path = "/create", produces = "application/json")
+    public ResponseEntity createReview(@RequestBody TemporaryReviewDTO dto) throws UserNotFoundException {
+        reviewService.saveNewTemporaryReview(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping(path = "/update", produces = "application/json")

@@ -27,7 +27,7 @@ public class AccountController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping(path = "/singUp", produces = "application/json")
+    @PostMapping(path = "/signUp", produces = "application/json")
     public ResponseEntity registration(@RequestBody RegistrationDTO dto) throws UserAlreadyExistException {
         registrationService.signUp(dto);
         return ResponseEntity.ok().build();

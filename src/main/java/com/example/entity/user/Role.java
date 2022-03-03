@@ -3,6 +3,7 @@ package com.example.entity.user;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,9 +17,9 @@ public class Role {
     @Column(name = "NAME")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "ACCOUNT_ROLES",
+            name = "ACCOUNTS_ROLES",
             joinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     )

@@ -26,7 +26,7 @@ public class PublishedReviewController {
     public ResponseEntity getPublishedReviews(@RequestParam(name = "id") Long userId){
         List<PublishedReviewDTO> publishedReviews = reviewService.getAllPublishedReviews(userId);
         if(publishedReviews.isEmpty())
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("You  don't have any published reviews");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("You don't have any published reviews");
         else
             return ResponseEntity.ok(publishedReviews);
     }
