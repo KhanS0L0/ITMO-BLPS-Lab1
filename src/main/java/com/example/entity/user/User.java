@@ -17,12 +17,7 @@ public class User extends Account {
     /**
      * список уведомлений, пришедших данному пользователю
      **/
-    @ManyToMany
-    @JoinTable(
-            name = "NOTIFICATIONS_RECIPIENTS",
-            joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "MESSAGE_ID", referencedColumnName = "ID")
-    )
+    @OneToMany(mappedBy = "recipient")
     private List<UserNotification> userNotifications;
 
     /**

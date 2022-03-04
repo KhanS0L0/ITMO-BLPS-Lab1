@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,15 +46,14 @@ public class NotificationServiceImpl implements NotificationService {
         UserNotification notification = notificationMapper.mapDTOToEntity(dto);
 
         Administrator administrator = administratorService.findAdministratorByUsername(dto.getSender());
-        notification.setSender(administrator);
-
         TemporaryReview review = reviewService.getTemporaryReviewById(dto.getReviewId());
         User author = review.getAuthor();
-        author.getUserNotifications().add(notification);
 
+        notification.setSender(administrator);
+        notification.setRecipient(author);
         notification.setDateOfSending(new Timestamp(new Date().getTime()));
-        userNotificationRepository.save(notification);
 
+        userNotificationRepository.save(notification);
         updateReviewInfo(review, dto.getRevisionResult());
     }
 

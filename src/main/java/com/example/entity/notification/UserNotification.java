@@ -38,14 +38,14 @@ public class UserNotification {
     private Administrator sender;
 
     /**
-     * список пользователей, которым нужно отправить уведомление (получатели)
+     * пользователь, которому нужно отправить уведомление (получатель)
      **/
     @NotNull
-    @ManyToMany
-    @JoinTable(
-            name = "NOTIFICATIONS_RECIPIENTS",
-            joinColumns = @JoinColumn(name = "MESSAGE_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    )
-    private List<User> recipients;
+    @ManyToOne
+    @JoinColumn(name = "RECIPIENT_ID", referencedColumnName = "ID")
+    private User recipient;
+
+    @NotNull
+    @Column(name = "REVIEW_ID")
+    private Long reviewId;
 }

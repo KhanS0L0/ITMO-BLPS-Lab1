@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Data
@@ -19,5 +20,5 @@ public class PublishedReviewDTO {
     private String conclusion;
     private String userLogin;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate publishedDate;
+    private Timestamp publishedDate;
 }

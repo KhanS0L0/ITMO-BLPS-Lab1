@@ -20,13 +20,14 @@ public class NotificationController {
     }
 
     @PostMapping(path = "/send", produces = "application/json")
-    public ResponseEntity sendNotification(@RequestBody UserNotificationDTO dto){
+    public ResponseEntity sendNotification(@RequestAttribute(name = "username") String username, @RequestBody UserNotificationDTO dto){
+        dto.setSender(username);
         notificationService.generateNotificationToUser(dto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(path = "/all", produces = "application/json")
-    public ResponseEntity getAllUserNotifications(@RequestParam(name = "id") Long userId){
+    public ResponseEntity getAllUserNotifications(@RequestAttribute(name = "userId") Long userId){
         List<UserNotificationDTO> notifications = notificationService.getAllNotifications(userId);
         if(notifications.isEmpty())
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

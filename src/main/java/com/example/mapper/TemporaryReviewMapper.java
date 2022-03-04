@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.dto.TemporaryReviewDTO;
+import com.example.entity.enums.ReviewStatus;
 import com.example.entity.review.TemporaryReview;
 import org.springframework.stereotype.Component;
 
@@ -47,5 +48,6 @@ public class TemporaryReviewMapper {
         entity.setAdvantages(dto.getAdvantages());
         entity.setDisadvantages(dto.getDisadvantages());
         entity.setConclusion(dto.getConclusion());
+        entity.setReviewStatus(ReviewStatus.ON_REVISION);
     }
 }

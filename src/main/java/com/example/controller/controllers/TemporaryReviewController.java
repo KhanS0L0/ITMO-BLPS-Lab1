@@ -21,7 +21,7 @@ public class TemporaryReviewController {
     }
 
     @GetMapping(path = "/all", produces = "application/json")
-    public ResponseEntity getTemporaryReviews(@RequestParam(name = "id") Long administratorId){
+    public ResponseEntity getTemporaryReviews(@RequestAttribute(name = "userId") Long administratorId){
         List<TemporaryReviewDTO> temporaryReviews = reviewService.getAllTemporaryReviews(administratorId);
         if(temporaryReviews.isEmpty())
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -30,7 +30,8 @@ public class TemporaryReviewController {
     }
 
     @PostMapping(path = "/create", produces = "application/json")
-    public ResponseEntity createReview(@RequestBody TemporaryReviewDTO dto) throws UserNotFoundException {
+    public ResponseEntity createReview(@RequestAttribute(name = "username") String username, @RequestBody TemporaryReviewDTO dto) throws UserNotFoundException {
+        dto.setUserLogin(username);
         reviewService.saveNewTemporaryReview(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

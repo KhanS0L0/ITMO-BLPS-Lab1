@@ -15,11 +15,13 @@ public class NotificationMapper {
         entity.setNotificationBody(dto.getNotificationBody());
         entity.setDateOfSending(dto.getDateOfSending());
         entity.setRevisionResult(dto.getRevisionResult());
+        entity.setReviewId(dto.getReviewId());
         return entity;
     }
 
     public UserNotificationDTO mapEntityToDTO(UserNotification entity){
         UserNotificationDTO dto = new UserNotificationDTO();
+        dto.setReviewId(entity.getReviewId());
         dto.setNotificationBody(entity.getNotificationBody());
         dto.setDateOfSending(entity.getDateOfSending());
         dto.setRevisionResult(entity.getRevisionResult());

@@ -5,7 +5,9 @@ import com.example.entity.review.PublishedReview;
 import com.example.entity.review.TemporaryReview;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -20,6 +22,7 @@ public class PublishedReviewMapper {
         review.setDisadvantages(temporaryReview.getDisadvantages());
         review.setConclusion(temporaryReview.getConclusion());
         review.setAuthor(temporaryReview.getAuthor());
+        review.setPublishedDate(new Timestamp(new Date().getTime()));
         return review;
     }
 
@@ -32,6 +35,7 @@ public class PublishedReviewMapper {
         dto.setDisadvantages(entity.getDisadvantages());
         dto.setConclusion(entity.getConclusion());
         dto.setUserLogin(entity.getAuthor().getUsername());
+        dto.setPublishedDate(entity.getPublishedDate());
         return dto;
     }
 

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -50,19 +51,18 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public void saveNewTemporaryReview(TemporaryReviewDTO dto) throws UserNotFoundException {
-        TemporaryReview entity = temporaryReviewMapper.mapDTOToEntity(dto);
-
         User author = userService.findUserByUsername(dto.getUserLogin());
         if(author == null)
-            throw new UserNotFoundException("No such user exception");
+            throw new UserNotFoundException("No such user");
 
+        TemporaryReview review = temporaryReviewMapper.mapDTOToEntity(dto);
         Administrator inspector = administratorService.findAdminWithMinWork();
 
-        entity.setAuthor(author);
-        entity.setInspector(inspector);
-        entity.setReviewStatus(ReviewStatus.ON_REVISION);
+        review.setAuthor(author);
+        review.setInspector(inspector);
+        review.setReviewStatus(ReviewStatus.ON_REVISION);
 
-        temporaryReviewRepository.save(entity);
+        temporaryReviewRepository.save(review);
     }
 
     @Override
@@ -78,8 +78,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void savePublishedReview(TemporaryReview review) {
         PublishedReview entity = publishedReviewMapper.mapTemporaryReviewToPublishedReview(review);
-        entity.setPublishedDate(new Timestamp(System.currentTimeMillis()));
-
         temporaryReviewRepository.delete(review);
         publishedReviewRepository.save(entity);
     }

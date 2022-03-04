@@ -14,5 +14,5 @@ public class UserNotificationDTO {
     private Timestamp dateOfSending;
     private String sender;
     private String revisionResult;
-    private long reviewId;
+    private Long reviewId;
 }
